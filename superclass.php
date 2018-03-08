@@ -1,43 +1,31 @@
 <?php
 
-class ToyShop
-{
-    public $color = 'Black';
-    public $size = 'small';
-    public $type = 'color';
-    public $price = '1000';
+class ToyShop{
     public $discont = '10';
     public $pop = 'popular';
-    public function changeColor($color)
-    {
-        $this->color->$color;
-    }
-    public function changeType($type){
-        $this->type->$type;
-    }
-    public function changeSize($size){
-        $this->size->$size;
-    }
-    public function changePrice($price)
-    {
-        $this->price->$price;
-    }
     public function changeDiskont($discont)
     {
-        $this->discont->$discont;
+        $this->discont = $discont;
     }
     public function changePop($pop)
     {
-        $this->pop->$pop;
+        $this->pop = $pop;
     }
 }
-
-
-class Car extends ToyShop
+interface ToyShopCar
 {
+    public function changeColor($color);
+    public function changeBox($box);
+}
+
+class Car extends ToyShop implements ToyShopCar{
     public $box = 'auto';
+    public $color = 'red';
     public function changeBox($box){
-        $this->box->$box;
+        $this->box = $box;
+    }
+    public function changeColor($color){
+        $this->color = $color;
     }
 }
 $mersedes = new Car();
@@ -46,33 +34,74 @@ $lada->color;
 $lada->changeBox('mehanic');
 $mersedes->changeColor('green');
 $mersedes->box;
+$mersedes->pop;
+$lada->changeDiskont('20');
 
-class TV extends ToyShop
+interface ToyShopTV
 {
+    public function changeType($type);
+    public function changeSize($size);
+}
+
+class TV extends ToyShop implements ToyShopTV{
+    public $type = 'color';
+    public $size = 'small';
+    public function changeType($type){
+        $this->type = $type;
+    }
+    public function changeSize($size){
+        $this->size = $size;
+    }
 }
 $LG = new TV();
 $Toshiba = new TV();
-$Toshiba->color;
 $LG->changeType('black&white');
+$Toshiba->type;
 $LG->size;
 $Toshiba->changeSize('big');
+$Toshiba->pop;
+$LG->changeDiskont('50');
 
-class Pen extends ToyShop
+interface ToyShopPen
 {
+    public function changeType($type);
+    public function changeColor($colorpen);
+}
+
+class Pen extends ToyShop implements ToyShopPen{
+    public $type = 'expencive';
+    public $colorpen = 'red';
+    public function changeType($type){
+        $this->type = $type;
+    }
+    public function changeColor($colorpen){
+        $this->colorpen = $colorpen;
+    }
 }
 $Parker = new Pen();
 $Pilot = new Pen();
 $Parker->type;
 $Pilot->changeType('cheap');
-$Parker->color;
+$Parker->colorpen;
 $Pilot->changeColor('Black');
+$Parker->discont;
+$Pilot->changePop('unpopular');
 
-class Duck extends ToyShop
+interface ToyShopDuck
 {
+    public function changeSize($size);
+    public function changeGend($gend);
+}
+
+class Duck extends ToyShop implements ToyShopDuck{
     public $gend = 'drake';
+    public $size = 'big';
     public function changeGend($gend)
     {
-        $this->gend->$gend;
+        $this->gend = $gend;
+    }
+    public function changeSize($size){
+        $this->size = $size;
     }
 }
 $Donald = new Duck();
@@ -81,13 +110,24 @@ $Donald->gend;
 $Daisy->changeGend('duck');
 $Donald->size;
 $Daisy->changeSize('small');
-
-class TVs extends ToyShop
+$Donald->pop;
+$Daisy->changeDiskont('25');
+interface ToyShopTVs
 {
+    public function changePrice($price);
+    public function changeTv($tv);
+}
+
+class TVs extends ToyShop implements ToyShopTVs{
     public $tv = 'Toshiba';
+    public $price = '100';
     public function changeTv($tv)
     {
-        $this->tv->$tv;
+        $this->tv = $tv;
+    }
+    public function changePrice($price)
+    {
+        $this->price = $price;
     }
 }
 $First = new TVs();
